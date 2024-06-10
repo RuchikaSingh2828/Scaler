@@ -1,0 +1,23 @@
+Recursion is a problem solving technique where the solution 
+depenends on solutions to smaller instances of the same problem.
+
+Why?
+- A great technique to simplify your solution
+- if you find yourself breaking down your problem into smaller 
+version of the same problem, recursion is very useful
+============================================================
+Every recursion solution needs to have a base case - a condition to terminate the recursion
+
+
+
+
+
+
+
+
+
+
+
+
+Username : singh2827
+Password : Ruchi123
