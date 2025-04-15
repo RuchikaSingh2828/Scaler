@@ -34,7 +34,7 @@
 // - For each prime p from 2 to A/2, check if (A-p) is also prime
 // - Return the first such pair, which will be lexicographically smallest
 
-const sieveEratothenese = (A) => {
+const golbachConjecture = (A) => {
   let ans = [];
   const sieve_arr = new Array(A + 1);
   // marking all the indexes true to show initially all numbers are prime
@@ -63,4 +63,4 @@ const sieveEratothenese = (A) => {
   }
 };
 
-console.log(sieveEratothenese(14)); // [3,11] // [7,7]
+console.log(golbachConjecture(14)); // [3,11] // [7,7]
