@@ -60,3 +60,8 @@ const frequencyOfElements = (A, B) => {
 };
 
 console.log(frequencyOfElements([2, 5, 9, 2, 8], [3, 2]));
+console.log(
+  firstOccurrence([6, 7, 10, 3, 10, 10, 3, 10], [1, 1, 6, 6, 7, 7, 6, 4, 9])
+); // 0 0 1 1 1 1 1 0 0
+console.log(firstOccurrence([1, 2, 1, 1], [1, 2, 3, 4, 5])); // 0 0 0 0 0
+console.log(firstOccurrence([1, 2, 1, 1], [1, 2, 3, 4, 5])); // 0 0 0 0 0
