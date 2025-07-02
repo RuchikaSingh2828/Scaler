@@ -125,7 +125,7 @@
 const kthSymbol = (A, B) => {
   B = BigInt(B);
   if (A === 1) return 0;
-  const parent = replace(A - 1, B / 2n);
+  const parent = kthSymbol(A - 1, B / 2n);
   return B % 2n === 0n ? parent : 1 - parent;
   // if (A === 0) return '0';
   // const num = kthSymbol(A - 1, B );
