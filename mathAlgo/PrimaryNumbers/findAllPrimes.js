@@ -65,3 +65,28 @@ const sieve = (A) => {
 
 console.log(sieve(7));
 console.log(sieve(12));
+
+// Time Complaxity explanation :
+// When we run the Sieve of Eratosthenes, for each prime p, we mark all its multiples as composite (not prime). Specifically:
+
+// For prime 2: we mark 4, 6, 8, 10, 12, ...
+// For prime 3: we mark 9, 12, 15, 18, 21, ... (starting from 3²)
+// For prime 5: we mark 25, 30, 35, 40, 45, ...
+// And so on...
+
+// The Mathematical Analysis
+// For each prime p ≤ √n, we mark approximately n/p numbers as composite. So our total operations are:
+// Total operations = Σ(n/p) for all primes p ≤ √n
+//                  = n × Σ(1/p) for all primes p ≤ √n
+// The magic happens with that sum Σ(1/p). This is where number theory comes to the rescue!
+// The Key Mathematical Result
+// There's a famous theorem in number theory (related to Mertens' theorem) that states:
+// The sum of reciprocals of primes up to m is approximately log log m
+// In mathematical notation:
+// Σ(1/p) for primes p ≤ m ≈ log log m + constant
+// This is a deep result that connects to the distribution of prime numbers and the Prime Number Theorem.
+// Putting It All Together
+// Substituting back into our complexity analysis:
+// Total operations ≈ n × (log log √n + constant)
+//                  ≈ n × (½ log log n + constant)
+//                  = O(n log log n)

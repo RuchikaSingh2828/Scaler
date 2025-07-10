@@ -53,20 +53,6 @@
 // Given A = "a".
 // Rank is clearly 1.
 
-// Enumerating all permutations and matching them with the current one is going to be exponential.
-
-// Let’s start by looking at the first character.
-
-// If the first character is X, all permutations which had the first character less than X would come before this permutation when sorted lexicographically.
-
-// The number of permutation with a character C as the first character = number of permutations possible with remaining N-1 character = (N-1)!
-
-// Can you use the above information to get the rank of the current permutation?
-
-// Be careful about taking modulo at each step properly, else code might result in an overflow.
-
-// Let’s start by looking at the first character.
-
 // If the first character is X, all permutations that had the first character less than X would come before this permutation when sorted lexicographically.
 
 // The number of permutations with a character C as the first character = number of permutations possible with remaining N-1 character = (N-1)!
@@ -81,7 +67,7 @@
 
 // Character 1: 'V'
 // All permutations which start with 'I', 'E' would come before 'VIEW'.
-// Number of such permutations = 3! * 2 = 12
+// Number of such permutations = 3! * 2 = 12 (3! for the remaining characters and 2 for the two characters that are smaller than 'V').
 
 // Let’s now remove ‘V’ and look at the rank of the permutation ‘IEW.’
 
@@ -96,6 +82,33 @@
 
 // So, we see that there are 12 + 2 = 14 permutations that would come before "VIEW".
 // Hence, the rank of permutation = 15.
+
+// Let's see this logic in code:
+const example = 'VIEW';
+const MOD = 1000003;
+
+function getRankStepByStep(A) {
+  let result = 1;
+  let n = A.length;
+  for (let i = 0; i < n; i++) {
+    let currentCode = A.charCodeAt(i);
+    let smaller = 0;
+    const noOfCharsOnRight = n - i - 1;
+    for (let j = i + 1; j < n; j++) {
+      if (currentCode > A.charCodeAt(j)) {
+        smaller = smaller + 1;
+      }
+    }
+    const add = (getFactorial(noOfCharsOnRight) * smaller) % MOD;
+    console.log(
+      `At index ${i} ('${A[i]}'): ${smaller} smaller chars on right, permutations skipped: ${add}`
+    );
+    result = (result + add) % MOD;
+  }
+  return result;
+}
+
+console.log(getRankStepByStep(example)); // Should print 15 with step-by-step logs
 
 const getFactorial = (n) => {
   const MOD = 1000003;

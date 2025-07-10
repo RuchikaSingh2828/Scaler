@@ -64,3 +64,28 @@ const golbachConjecture = (A) => {
 };
 
 console.log(golbachConjecture(14)); // [3,11] // [7,7]
+
+// Looking at this problem, we need to understand what's being asked and then build a solution step by step. This is a classic application of Goldbach's conjecture, which states that every even integer greater than 2 can be expressed as the sum of two primes.
+// Let me break down the approach we'll take:
+// Understanding the Problem:
+// We need to find two prime numbers that add up to our given even number A. If multiple solutions exist, we want the lexicographically smallest one. This means we want the pair where the first prime is as small as possible, and if there are ties, the second prime should also be as small as possible.
+// The Strategy:
+// The key insight is that if we check primes in ascending order starting from 2, the first valid pair we find will automatically be the lexicographically smallest. This is because we're testing the smallest possible first prime, and for each first prime, there's only one possible second prime (A minus the first prime).
+// Implementation Approach:
+
+// Generate all prime numbers up to A using the Sieve of Eratosthenes (this is efficient for the given constraints)
+// For each prime p starting from 2, check if (A - p) is also prime
+// Return the first valid pair we find
+
+// Let me implement this solution with detailed explanations:
+
+// print(f"A = 20: {result}")  # Expected: [3, 17]
+
+// Why This Is So Efficient
+// The beautiful thing about this complexity is that log log n grows incredibly slowly. Let me show you:
+
+// For n = 1,000: log log n ≈ 2.6
+// For n = 1,000,000: log log n ≈ 3.9
+// For n = 1,000,000,000: log log n ≈ 5.2
+
+// Even for astronomically large numbers, log log n barely increases! This makes the Sieve of Eratosthenes remarkably efficient.
