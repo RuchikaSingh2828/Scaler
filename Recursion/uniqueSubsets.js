@@ -22,3 +22,42 @@ function uniqueSubsets(A) {
   backtrack(0);
   return result;
 }
+
+// Sample calls and outputs:
+
+console.log(uniqueSubsets([1, 2, 2]));
+// Possible output:
+// [
+//   [], [1], [1,2], [1,2,2], [2], [2,2]
+// ]
+
+console.log(uniqueSubsets([1, 2, 3]));
+// Possible output:
+// [
+//   [], [1], [1,2], [1,2,3], [1,3], [2], [2,3], [3]
+// ]
+
+console.log(uniqueSubsets([1, 2, 2, 3, 3, 4, 5]));
+// Possible output (not in order):
+// [
+//   [],
+//   [1], [1,2], [1,2,2], [1,2,2,3], [1,2,2,3,3], [1,2,2,3,3,4], [1,2,2,3,3,4,5], ...
+//   [2], [2,2], [2,2,3], [2,2,3,3], [2,2,3,3,4], [2,2,3,3,4,5], ...
+//   [3], [3,3], [3,3,4], [3,3,4,5], ...
+//   [4], [4,5], [5]
+// ]
+console.log(uniqueSubsets([10, 9, -20, -11, -8, -4, 2, -12, 14, 1, -18]));
+// Output: An array of all unique subsets (power set) of the input array, sorted internally to handle duplicates.
+// Since there are 11 elements, the output will have 2^11 = 2048 subsets.
+// Example (first few subsets):
+// [
+//   [],
+//   [-20],
+//   [-20,-18],
+//   [-20,-18,-12],
+//   ...
+//   [10,14],
+//   [10,14,9],
+//   ...
+// ]
+// The actual output is too large to display fully here.
