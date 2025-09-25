@@ -104,14 +104,21 @@ const findMedianSortedArrays = (A, B) => {
   return 0.0; // control should never reach here if input arrays are sorted
 };
 
-console.log(findMedianSortedArrays([1, 4, 5], [2, 3])); // 3.0
-console.log(findMedianSortedArrays([1, 2, 3], [4])); // 2.5
-console.log(findMedianSortedArrays([1, 3], [2])); // 2.0
-console.log(findMedianSortedArrays([1, 2], [3, 4])); // 2.5
-console.log(findMedianSortedArrays([1, 2, 3, 6], [4, 5])); // 3.5
-console.log(findMedianSortedArrays([1, 2, 3], [4, 5, 6])); // 3.5
-console.log(findMedianSortedArrays([1, 2], [3, 4, 5, 6])); // 3.5
-console.log(findMedianSortedArrays([1, 2, 3, 4], [5, 6])); // 3.5
-console.log(findMedianSortedArrays([1, 2, 3, 4, 5], [6])); // 3.5
-console.log(findMedianSortedArrays([1, 2, 3, 4, 5, 6], [7])); // 4.0
-console.log(findMedianSortedArrays([1, 2, 3, 4, 5], [6, 7])); // 4.0
+console.log(findMedianSortedArrays([-43, -25, -18, -15, -10, 9, 39, 40], B)); // -10.0
+// console.log(findMedianSortedArrays([], [20])); // 20.0
+// console.log(findMedianSortedArrays([20], [])); // 20.0
+// console.log(findMedianSortedArrays([1], [2])); // 1.5
+// console.log(findMedianSortedArrays([1, 3], [2])); // 2.0
+// console.log(findMedianSortedArrays([1, 2], [3, 4])); // 2.5
+
+// console.log(findMedianSortedArrays([1, 4, 5], [2, 3])); // 3.0
+// console.log(findMedianSortedArrays([1, 2, 3], [4])); // 2.5
+// console.log(findMedianSortedArrays([1, 3], [2])); // 2.0
+// console.log(findMedianSortedArrays([1, 2], [3, 4])); // 2.5
+// console.log(findMedianSortedArrays([1, 2, 3, 6], [4, 5])); // 3.5
+// console.log(findMedianSortedArrays([1, 2, 3], [4, 5, 6])); // 3.5
+// console.log(findMedianSortedArrays([1, 2], [3, 4, 5, 6])); // 3.5
+// console.log(findMedianSortedArrays([1, 2, 3, 4], [5, 6])); // 3.5
+// console.log(findMedianSortedArrays([1, 2, 3, 4, 5], [6])); // 3.5
+// console.log(findMedianSortedArrays([1, 2, 3, 4, 5, 6], [7])); // 4.0
+// console.log(findMedianSortedArrays([1, 2, 3, 4, 5], [6, 7])); // 4.0
