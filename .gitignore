@@ -1,3 +1,7 @@
 node_modules/
 .history/
 .qodo
+*.test.js
+*.spec.js
+__tests__/
+coverage/
