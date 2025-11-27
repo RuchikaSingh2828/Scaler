@@ -71,3 +71,6 @@ export function containerWithMaxWater(A) {
   }
   return maxArea;
 }
+
+console.log(container_with_max_water([1, 5, 4, 3])); // Output: 6
+console.log(container_with_max_water([1])); // Output: 0
