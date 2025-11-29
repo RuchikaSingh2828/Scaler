@@ -57,3 +57,41 @@
 // Explanation 2:
 
 //  [10, 2] is the only pair such abs(10+2-13) is minimum.
+
+const closestPairFromTwoFunctions = function (A, B, C) {
+  let n = A.length;
+  let m = B.length;
+  let left = 0;
+  let right = m - 1;
+  let minDiff = Infinity;
+  let result = [];
+  let bestLeft = -1;
+  let bestRight = -1;
+
+  while (left < n && right >= 0) {
+    let sum = A[left] + B[right];
+    let currentDiff = Math.abs(sum - C);
+
+    if (
+      currentDiff < minDiff ||
+      (currentDiff === minDiff &&
+        (left < bestLeft || (left === bestLeft && right < bestRight)))
+    ) {
+      minDiff = currentDiff;
+      bestLeft = left;
+      bestRight = right;
+      result = [A[left], B[right]];
+    }
+
+    if (sum < C) {
+      left++;
+    } else {
+      right--;
+    }
+  }
+
+  return result;
+};
+
+console.log(closestPairFromTwoFunctions([1, 2, 3, 4, 5], [2, 4, 6, 8], 9)); // [1, 8]
+console.log(closestPairFromTwoFunctions([5, 10, 20], [1, 2, 30], 13)); // [10, 2]
