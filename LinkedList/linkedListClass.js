@@ -82,6 +82,20 @@ export class LinkedList {
     this.size = 0;
   }
 
+  insertAtEnd(value) {
+    const newNode = new ListNode(value);
+    if (!this.head) {
+      this.head = newNode;
+    } else {
+      let current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = newNode;
+    }
+    this.size++;
+  }
+
   insert_node(position, value) {
     if (position < 1 || position > this.size + 1) {
       return; // Invalid position
@@ -133,15 +147,14 @@ export class LinkedList {
   }
 }
 
-const ll1 = new LinkedList();
-ll1.insert_node(1, 23);
-ll1.insert_node(2, 24);
-ll1.print_ll();
-ll1.delete_node(1);
-ll1.print_ll();
+// const ll1 = new LinkedList();
+// ll1.insert_node(1, 23);
+// ll1.insert_node(2, 24);
+// ll1.print_ll();
+// ll1.delete_node(1);
+// ll1.print_ll();
 
-const ll2 = new LinkedList();
-ll2.insert_node(1, 54);
-ll2.delete_node(10);
-ll2.print_ll();
-
+// const ll2 = new LinkedList();
+// ll2.insert_node(1, 54);
+// ll2.delete_node(10);
+// ll2.print_ll();
