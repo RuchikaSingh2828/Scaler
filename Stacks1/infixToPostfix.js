@@ -71,6 +71,7 @@ function infixToPostfix(A) {
   };
 
   const isOperator = (c) => ['^', '*', '/', '+', '-'].includes(c);
+  const isRightAssociative = (op) => op === '^';
 
   const output = [];
   const stack = [];
@@ -91,9 +92,9 @@ function infixToPostfix(A) {
       while (
         stack.length &&
         isOperator(stack[stack.length - 1]) &&
-        (precedence[char] < precedence[stack[stack.length - 1]] ||
+        (precedence[stack[stack.length - 1]] > precedence[char] ||
           (precedence[char] === precedence[stack[stack.length - 1]] &&
-            char !== '^'))
+            !isRightAssociative(stack[stack.length - 1])))
       ) {
         output.push(stack.pop());
       }
@@ -109,4 +110,5 @@ function infixToPostfix(A) {
 }
 // Example usage:
 // const infixExpr = "a+b*(c^d-e)^(f+g*h)-i";
+console.log(infixToPostfix('c*(u-p)^e/(w*x^p)^k^(d^o)')); // output: "cup-e^*wxp^/kdo^^^*"
 // console.log(infixToPostfix(infixExpr)); // Output: "abcd^e-fgh*+^*+i-"
