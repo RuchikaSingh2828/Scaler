@@ -55,36 +55,37 @@
 
 // helper constructor for tree nodes
 function TreeNode(val, left = null, right = null) {
-    this.val = val;
-    this.left = left;
-    this.right = right;
+  this.val = val;
+  this.left = left;
+  this.right = right;
 }
 
 function verticalOrderTraversal(A) {
-    if (!A) return [];
-    let queue = [[A, 0]];
-    let map = new Map();
-    let min = 0, max = 0;
-    while (queue.length) {
-        let [node, level] = queue.shift();
-        if (!map.has(level)) {
-            map.set(level, []);
-        }
-        map.get(level).push(node.val);
-        min = Math.min(min, level);
-        max = Math.max(max, level);
-        if (node.left) {
-            queue.push([node.left, level - 1]);
-        }
-        if (node.right) {
-            queue.push([node.right, level + 1]);
-        }
+  if (!A) return [];
+  let queue = [[A, 0]];
+  let map = new Map();
+  let min = 0,
+    max = 0;
+  while (queue.length) {
+    let [node, level] = queue.shift();
+    if (!map.has(level)) {
+      map.set(level, []);
     }
-    let result = [];
-    for (let i = min; i <= max; i++) {
-        result.push(map.get(i));
+    map.get(level).push(node.val);
+    min = Math.min(min, level);
+    max = Math.max(max, level);
+    if (node.left) {
+      queue.push([node.left, level - 1]);
     }
-    return result;
+    if (node.right) {
+      queue.push([node.right, level + 1]);
+    }
+  }
+  let result = [];
+  for (let i = min; i <= max; i++) {
+    result.push(map.get(i));
+  }
+  return result;
 }
 
 // --- sample usage --------------------------------------------------
@@ -98,9 +99,10 @@ function verticalOrderTraversal(A) {
 //    3     7
 //   / \     \
 //  2   5     9
-const root = new TreeNode(6,
-    new TreeNode(3, new TreeNode(2), new TreeNode(5)),
-    new TreeNode(7, null, new TreeNode(9))
+const root = new TreeNode(
+  6,
+  new TreeNode(3, new TreeNode(2), new TreeNode(5)),
+  new TreeNode(7, null, new TreeNode(9)),
 );
 
 console.log(verticalOrderTraversal(root));
@@ -108,4 +110,4 @@ console.log(verticalOrderTraversal(root));
 // (prints the correct vertical order traversal)
 
 // if you really want to convert a level-order array into a tree,
-// write a small converter separately and pass its result here. 
+// write a small converter separately and pass its result here.
