@@ -48,7 +48,7 @@
 //  Both the expression are different.
 function checkIfIdentical(A, B) {
   function normalizeExpression(expr) {
-    const stack = [];
+    const stack = [1];
     let sign = 1; // 1 for positive, -1 for negative
     const result = {};
 
@@ -65,6 +65,7 @@ function checkIfIdentical(A, B) {
       } else if (char === ')') {
         sign = stack.pop();
       } else if (char >= 'a' && char <= 'z') {
+        sign = stack[stack.length - 1] * sign;
         result[char] = (result[char] || 0) + sign;
       }
     }
