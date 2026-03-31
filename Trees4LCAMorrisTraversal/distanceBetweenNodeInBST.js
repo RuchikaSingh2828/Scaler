@@ -62,3 +62,46 @@
 
 //  Path between 2 and 6 is: 2 -> 6. Distance will be 1
 
+function distanceBetweenNodes(A, B, C) {
+  const findLCA = (root, B, C) => {
+    if (root === null) {
+      return null;
+    }
+    if (root.val > B && root.val > C) {
+      return findLCA(root.left, B, C);
+    }
+    if (root.val < B && root.val < C) {
+      return findLCA(root.right, B, C);
+    }
+    return root;
+  };
+
+  const findDistance = (root, key) => {
+    if (root === null) {
+      return -1;
+    }
+    if (root.val === key) {
+      return 0;
+    } else if (root.val > key) {
+      const leftDistance = findDistance(root.left, key);
+      return leftDistance === -1 ? -1 : leftDistance + 1;
+    } else {
+      const rightDistance = findDistance(root.right, key);
+      return rightDistance === -1 ? -1 : rightDistance + 1;
+    }
+  };
+
+  const lca = findLCA(A, B, C);
+  if (lca === null) {
+    return -1; // If LCA doesn't exist, return -1
+  }
+
+  const distanceB = findDistance(lca, B);
+  const distanceC = findDistance(lca, C);
+
+  if (distanceB === -1 || distanceC === -1) {
+    return -1; // If either B or C is not found in the tree, return -1
+  }
+
+  return distanceB + distanceC;
+} 
