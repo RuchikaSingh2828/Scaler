@@ -71,14 +71,14 @@ function kSpacesApart(A, B) {
       let i = this.heap.length - 1;
 
       while (i > 0) {
-        let p = Math.floor((i - 1) / 2);
+        const parent = Math.floor((i - 1) / 2);
 
-        if (this.heap[p] < this.heap[i]) {
+        if (this.heap[parent] <= this.heap[i]) {
           break;
         }
 
-        [this.heap[p], this.heap[i]] = [this.heap[i], this.heap[p]];
-        i = p;
+        [this.heap[parent], this.heap[i]] = [this.heap[i], this.heap[parent]];
+        i = parent;
       }
     }
 
@@ -95,10 +95,11 @@ function kSpacesApart(A, B) {
 
     bubbleDown() {
       let i = 0;
-      let n = this.heap.length - 1;
-      while (i < n) {
-        let left = 2 * i + 1;
-        let right = 2 * i + 2;
+      const n = this.heap.length;
+
+      while (true) {
+        const left = 2 * i + 1;
+        const right = 2 * i + 2;
         let smallest = i;
 
         if (left < n && this.heap[left] < this.heap[smallest]) {
@@ -109,6 +110,7 @@ function kSpacesApart(A, B) {
         }
 
         if (smallest === i) break;
+
         [this.heap[smallest], this.heap[i]] = [
           this.heap[i],
           this.heap[smallest],
@@ -122,21 +124,32 @@ function kSpacesApart(A, B) {
     }
   }
 
-  let heap = new minHeap();
-  let res = [];
-  for (let i = 0; i <= B; i++) {
+  if (!Array.isArray(A) || A.length === 0) {
+    return [];
+  }
+
+  const heap = new minHeap();
+  const result = [];
+  const n = A.length;
+  const initialWindow = Math.min(n, B + 1);
+
+  for (let i = 0; i < initialWindow; i++) {
     heap.push(A[i]);
   }
-  for (let i = B + 1; i < A.length - 1; i++) {
-    res.push(heap.pop());
+
+  for (let i = initialWindow; i < n; i++) {
+    result.push(heap.pop());
     heap.push(A[i]);
   }
 
   while (heap.size() > 0) {
-    res.push(heap.pop());
+    result.push(heap.pop());
   }
 
-  return res;
+  return result;
 }
 
-console.log(kSpacesApart([25, 16, 11, 31, 28, 20, 3, 8], 6)); // 3 8 11 16 20 25 28 31
+// console.log(kSpacesApart([25, 16, 11, 31, 28, 20, 3, 8], 6)); // 3 8 11 16 20 25 28 31
+// console.log(kSpacesApart([1, 40, 2, 3], 2)); // 1 2 3 40
+// console.log(kSpacesApart([2, 1, 17, 10, 21, 95], 1)); // 1 2 10 17 21 95
+console.log(kSpacesApart([17, 4, 21, 33, 28, 23, 36, 12, 7], 7)); // 4 7 12 17 21 23 28 33 36
