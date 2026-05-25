@@ -56,52 +56,55 @@
 //  Number of distinct heaps possible with 10 distinct integers = 3360.
 
 function waysToFormMaxHeap(A) {
-  const mod = 1e9 + 7;
+  const MOD = 1000000007n;
 
-  // Precompute Pascal's triangle for nCr using DP approach
-  const C = Array.from({ length: A + 1 }, () => Array(A + 1).fill(0));
+  const nCr = Array.from({ length: A + 1 }, () => Array(A + 1).fill(0n));
+
   for (let i = 0; i <= A; i++) {
-    C[i][0] = 1;
+    nCr[i][0] = 1n;
     if (i > 0) {
       for (let j = 1; j <= i; j++) {
-        C[i][j] = (C[i - 1][j - 1] + C[i - 1][j]) % mod;
+        nCr[i][j] = (nCr[i - 1][j - 1] + nCr[i - 1][j]) % MOD;
       }
     }
   }
 
-  // Function to calculate the number of nodes in the left subtree of a complete binary tree with n nodes
-  function getLeftSubtreeSize(n) {
-    if (n === 0) return 0;
-    const h = Math.floor(Math.log2(n));
-    const maxNodesAtH = 1 << h; // 2^h
-    const nodesAboveH = (1 << h) - 1; // Total nodes above level h
-    const remainingNodes = n - nodesAboveH;
+  function getLeftSubTreeSize(n) {
+    if (n <= 1) return 0;
+    let h = Math.floor(Math.log2(n));
+    let maxOnLeft = 1 << (h - 1); // 2 ^ (h-1)
+    let nodesAboveLAst = (1 << h) - 1;
+    let nodeOnLast = n - nodesAboveLAst;
+    let nodesOnLastLeft = Math.min(maxOnLeft, nodeOnLast);
 
-    return Math.min(maxNodesAtH, remainingNodes);
+    return nodesOnLastLeft + maxOnLeft - 1;
   }
 
-  // Memoization for number of heaps with n nodes
   const memo = new Map();
 
   function countHeaps(n) {
-    if (n <= 1) return 1; // Base case: 0 or 1 node has only one heap
+    if (n <= 1) return 1;
     if (memo.has(n)) return memo.get(n);
 
-    const leftSize = getLeftSubtreeSize(n);
+    const leftSize = getLeftSubTreeSize(n);
     const rightSize = n - 1 - leftSize;
 
     // Number of ways to choose leftSize nodes from n-1 nodes
-    const waysToChooseLeft = C[n - 1][leftSize];
+    const waysToChooseLeft = nCr[n - 1][leftSize];
 
-    // Total heaps is the product of ways to choose left subtree and the number of heaps in left and right subtrees
     const totalHeaps =
-      (((waysToChooseLeft * countHeaps(leftSize)) % mod) *
-        countHeaps(rightSize)) %
-      mod;
+      (((waysToChooseLeft * BigInt(countHeaps(leftSize))) % MOD) *
+        BigInt(countHeaps(rightSize))) %
+      MOD;
 
     memo.set(n, totalHeaps);
+
     return totalHeaps;
   }
 
-  return countHeaps(A);
+  return Number(countHeaps(A));
 }
+
+console.log(waysToFormMaxHeap(4)); // Output: 3
+console.log(waysToFormMaxHeap(10)); // Output: 3360
+console.log(waysToFormMaxHeap(100)); // Output: 812145033
